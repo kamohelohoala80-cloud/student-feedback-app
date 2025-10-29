@@ -1,0 +1,370 @@
+/* === ULTIMATE NEON-GLASS MORPH UI === */
+:root {
+  /* Cyberpunk Neon Palette */
+  --neon-gold: #ffd700;
+  --neon-gold-glow: #ffed4a;
+  --neon-aqua: #00f5ff;
+  --neon-aqua-glow: #7fffd4;
+  --neon-purple: #bf00ff;
+  --neon-purple-glow: #e100ff;
+  --neon-orange: #ff6b35;
+  --neon-orange-glow: #ffa500;
+  --neon-blue: #0066ff;
+  --neon-blue-glow: #00ccff;
+  
+  /* Matrix Effects */
+  --matrix-green: #00ff41;
+  --matrix-glow: #00ff88;
+  
+  /* Glass Morphism */
+  --glass-ultra: rgba(255, 255, 255, 0.15);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shadow: rgba(0, 0, 0, 0.3);
+  
+  /* Animations */
+  --transition-smooth: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --transition-bounce: all 0.6s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+}
+
+/* === MATRIX RAIN BACKGROUND === */
+.App {
+  position: relative;
+  min-height: 100vh;
+  background: radial-gradient(ellipse at bottom, #0d1d31 0%, #0c0d13 100%);
+  overflow: hidden;
+}
+
+/* Matrix rain effect */
+.matrix-rain {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -3;
+}
+
+.matrix-rain::before {
+  content: "";
+  position: absolute;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 200%;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(0, 255, 65, 0.1) 50%,
+    transparent 100%
+  );
+  animation: matrixRain 8s linear infinite;
+  filter: blur(1px);
+}
+
+@keyframes matrixRain {
+  0% { transform: translateY(-100%) rotate(0deg); }
+  100% { transform: translateY(100%) rotate(360deg); }
+}
+
+/* === FLOATING GEOMETRIC SHAPES === */
+.floating-shapes {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -2;
+}
+
+.shape {
+  position: absolute;
+  background: radial-gradient(circle, var(--neon-aqua) 0%, transparent 70%);
+  border-radius: 50%;
+  animation: float 20s infinite linear;
+  filter: blur(40px);
+  opacity: 0.1;
+}
+
+.shape:nth-child(1) {
+  width: 300px;
+  height: 300px;
+  top: 10%;
+  left: 10%;
+  background: radial-gradient(circle, var(--neon-gold) 0%, transparent 70%);
+  animation-duration: 25s;
+}
+
+.shape:nth-child(2) {
+  width: 400px;
+  height: 400px;
+  top: 60%;
+  right: 10%;
+  background: radial-gradient(circle, var(--neon-purple) 0%, transparent 70%);
+  animation-duration: 30s;
+  animation-direction: reverse;
+}
+
+.shape:nth-child(3) {
+  width: 250px;
+  height: 250px;
+  bottom: 20%;
+  left: 20%;
+  background: radial-gradient(circle, var(--neon-blue) 0%, transparent 70%);
+  animation-duration: 35s;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  25% { transform: translate(100px, -50px) rotate(90deg) scale(1.1); }
+  50% { transform: translate(50px, 100px) rotate(180deg) scale(0.9); }
+  75% { transform: translate(-100px, 50px) rotate(270deg) scale(1.05); }
+}
+
+/* === NEON GLASS CONTAINERS === */
+.App-header {
+  background: var(--glass-ultra);
+  backdrop-filter: blur(25px) saturate(200%);
+  -webkit-backdrop-filter: blur(25px) saturate(200%);
+  border: 1px solid var(--glass-border);
+  border-radius: 30px;
+  padding: 3rem 2rem;
+  margin: 3rem auto;
+  width: min(90%, 1000px);
+  box-shadow: 
+    0 8px 32px var(--glass-shadow),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition-bounce);
+}
+
+/* Neon border animation */
+.App-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 30px;
+  padding: 2px;
+  background: linear-gradient(
+    45deg,
+    var(--neon-gold),
+    var(--neon-aqua),
+    var(--neon-purple),
+    var(--neon-orange)
+  );
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: subtract;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  animation: neonBorder 3s linear infinite;
+  opacity: 0.7;
+}
+
+@keyframes neonBorder {
+  0% { filter: hue-rotate(0deg) blur(0.5px); }
+  100% { filter: hue-rotate(360deg) blur(0.5px); }
+}
+
+/* === CYBERPUNK CARDS === */
+.card {
+  background: var(--glass-ultra);
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  border-radius: 25px;
+  padding: 2.5rem;
+  margin: 2rem auto;
+  width: min(90%, 700px);
+  box-shadow: 
+    0 8px 32px var(--glass-shadow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition-bounce);
+  cursor: pointer;
+}
+
+/* Holographic effect on hover */
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: left 0.6s ease;
+}
+
+.card:hover::before {
+  left: 100%;
+}
+
+.card:hover {
+  transform: translateY(-15px) scale(1.02);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 30px rgba(255, 215, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border-color: var(--neon-gold);
+}
+
+/* === CYBER NAVBAR === */
+.navbar {
+  background: var(--glass-ultra) !important;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  margin: 2rem auto;
+  padding: 1rem 2rem;
+  width: min(95%, 1200px);
+  box-shadow: 
+    0 8px 32px var(--glass-shadow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transition: var(--transition-smooth);
+}
+
+.navbar-brand {
+  font-weight: 800;
+  font-size: 1.5rem;
+  background: linear-gradient(45deg, var(--neon-gold), var(--neon-aqua));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+  transition: var(--transition-smooth);
+}
+
+.nav-link {
+  color: white !important;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.75rem 1.5rem;
+  margin: 0 0.25rem;
+  border-radius: 15px;
+  transition: var(--transition-bounce);
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-link::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s ease;
+}
+
+.nav-link:hover::before {
+  left: 100%;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background: linear-gradient(45deg, rgba(255, 215, 0, 0.2), rgba(0, 245, 255, 0.2));
+  box-shadow: 
+    0 0 20px rgba(255, 215, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform: translateY(-3px);
+  color: var(--neon-gold) !important;
+}
+
+/* === CYBER TYPOGRAPHY === */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 800;
+  margin-bottom: 1rem;
+  background: linear-gradient(45deg, var(--neon-gold), var(--neon-aqua), var(--neon-purple));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 30px rgba(0, 245, 255, 0.3);
+  animation: textGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes textGlow {
+  0% { filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.3)); }
+  100% { filter: drop-shadow(0 0 20px rgba(0, 245, 255, 0.5)); }
+}
+
+/* === CYBER BUTTONS === */
+.btn {
+  border: none;
+  border-radius: 15px;
+  padding: 0.75rem 2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: var(--transition-bounce);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary {
+  background: linear-gradient(45deg, var(--neon-gold), var(--neon-orange));
+  color: #000;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+}
+
+.btn-primary:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 
+    0 10px 25px rgba(255, 215, 0, 0.6),
+    0 0 30px rgba(255, 215, 0, 0.4);
+}
+
+/* === RESPONSIVE DESIGN === */
+@media (max-width: 768px) {
+  .App-header {
+    padding: 2rem 1rem;
+    margin: 2rem auto;
+    border-radius: 20px;
+  }
+  
+  .card {
+    padding: 1.5rem;
+    border-radius: 20px;
+  }
+  
+  .navbar {
+    flex-direction: column;
+    padding: 1rem;
+    border-radius: 15px;
+  }
+  
+  .nav-link {
+    width: 100%;
+    text-align: center;
+    margin: 0.25rem 0;
+  }
+}
+
+/* === SCROLL ANIMATIONS === */
+.card, .App-header, .navbar {
+  animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === CURSOR GLOW === */
+body:hover {
+  cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='48' viewport='0 0 100 100' style='fill:black;font-size:24px;'><text y='50%'>⚡</text></svg>") 16 0, auto;
+}
