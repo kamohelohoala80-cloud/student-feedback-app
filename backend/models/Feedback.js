@@ -1,5 +1,5 @@
-const db = require('../config/database');
+const pool = require('../config/database');
 
-// Table creation is already handled in database.js
+// Table creation is handled in database.js
 // Just export the database connection
-module.exports = db;
+module.exports = pool;
