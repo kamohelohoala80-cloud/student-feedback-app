@@ -43,7 +43,8 @@ const FeedbackForm = () => {
     }
     
     try {
-      const response = await axios.post('http://localhost:5000/api/feedback', formData);
+      // FIXED LINE 46: Removed unused 'response' variable
+      await axios.post('https://student-feedback-app-otc1.onrender.com/api/feedback', formData);
       setMessage('Feedback submitted successfully!');
       setFormData({
         studentName: '',

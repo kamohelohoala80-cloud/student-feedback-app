@@ -11,7 +11,7 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/feedback');
+        const response = await axios.get('https://student-feedback-app-otc1.onrender.com/api/feedback');
         const feedbacks = response.data;
         
         const total = feedbacks.length;
